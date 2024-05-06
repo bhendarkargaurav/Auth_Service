@@ -1,4 +1,5 @@
-const { User } = require('../models/index');
+const { where } = require('sequelize');
+const { User, Role} = require('../models/index');
 
 class UserRepository {
 
@@ -48,6 +49,26 @@ async destroy(userId) {
         console.log("something went wrong in password comparison");
         throw error;
     }
-   }
 }
+
+//this will tell us whether the user is admin or not
+
+    async isAdmin(userId) {
+        try {
+            const user = await User.findByPk(userId);
+            const adminRole = await Role.findOne({
+                where: {
+                    name: 'ADMIN'
+                }
+            });
+            console.log(adminRole, user);
+            return user.hasRole(adminRole);
+        } catch (error) {
+            console.log("something went wrong in password comparison");
+            throw error;
+        }
+    }
+
+   }
+
 module.exports = UserRepository;
