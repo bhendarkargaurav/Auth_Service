@@ -14,6 +14,9 @@ class UserService {
             const user = await this.UserRepository.create(data);
             return user;
         } catch (error) {
+            if(error.name = 'SequelizeValidationError') {
+                throw error;
+            }
             console.log("something went wrong in the service layer");
             throw error;
         }
@@ -26,7 +29,7 @@ class UserService {
             // step 2-> comapare incomming plain password with store encrypted password
             const passwordsMatch = this.checkPassword(plainPassword, user.password);
             if(!passwordsMatch) {
-                console.log("PAssword doesn't match");
+                console.log("Password doesn't match");
                 throw {error: 'incorrect Password'};
             }
             // step 3-> if password match then creaqte a tolen and send it to the user 
