@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const UserRepository = require('../repository/user-repository');
 const { JWT_KEY } = require('../config/serverConfig');
+const { ValidationError } = require('sequelize');
 // const { use } = require('../routes');
 
 class UserService {
@@ -38,6 +39,9 @@ class UserService {
             return newJWT;
             
         } catch (error) {
+            if(error.name = 'AttributeNotFound') {
+                 throw error;
+            }
             console.log("something went wrong in the service layer");
             throw error;
         }

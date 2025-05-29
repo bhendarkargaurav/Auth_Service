@@ -1,6 +1,6 @@
 const { response } = require('express');
 const UserService = require('../services/user-service');
-const UserRepository = require('../repository/user-repository');
+// const UserRepository = require('../repository/user-repository');
 
 const userService = new UserService();
 
@@ -38,11 +38,11 @@ const signIn = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
-            message: "Something went wrong",
+        return res.status(error.statusCode).json({
+            message: error.message,
             data: {},
             success: false,
-            err: error
+            err: error.explanation
         });
     }
 }
@@ -55,7 +55,7 @@ const signIn = async (req, res) => {
                 success: true,
                 err: {},
                 data: response,
-                message: 'user is authenticated and toen is valid'
+                message: 'user is authenticated and token is valid'
              }); 
 
         } catch (error) {
@@ -67,12 +67,10 @@ const signIn = async (req, res) => {
                 err: error
             })
         }
-
     }
 
     const isAdmin = async(req, res) => {
         try {
-            // const response = await userRepository.isAdmin(req.body.id);
             const response = await userService.isAdmin(req.body.id);
             return res.status(200).json({
                 data: response,
