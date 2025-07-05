@@ -1,5 +1,5 @@
 const { response } = require('express');
-const UserService = require('../services/user-service');
+const UserService = require('../services/user-service.js');
 // const UserRepository = require('../repository/user-repository');
 
 const userService = new UserService();

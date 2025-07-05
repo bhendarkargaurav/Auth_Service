@@ -1,7 +1,7 @@
 // const { where } = require('sequelize');
-const  ValidationError  = require('../utils/validation-error');
-const { User, Role} = require('../models/index');
-const ClientError = require('../utils/client-error');
+const  ValidationError  = require('../utils/validation-error.js');
+const { User, Role} = require('../models/index.js');
+const ClientError = require('../utils/client-error.js');
 const { StatusCode, StatusCodes } = require('http-status-codes'); 
 
 class UserRepository {
