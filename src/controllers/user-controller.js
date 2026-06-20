@@ -15,16 +15,17 @@ const create = async (req, res) => {
             message: "Successfully created a new user",
             data: response,
             err: {}
+            
         })
     } catch (error) {
-        // console.log(error);
-        return res.status(error.statusCode).json({
-            message: error.message, 
-            data: {},
-            success: false,
-            err: error.explanation
-        })
-    }
+    console.log("CONTROLLER ERROR:", error);
+
+    return res.status(500).json({
+        success: false,
+        message: error.message,
+        err: error
+    });
+}
 }
 
 const signIn = async (req, res) => {
