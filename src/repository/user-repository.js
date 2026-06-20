@@ -11,11 +11,20 @@ class UserRepository {
         const user = await User.create(data);
         return user;
     } catch (error) {
-        if(error.name = 'SequelizeValidationError') {
+        if(error.name === 'SequelizeValidationError') {
+            
             throw new ValidationError(error);
+            
         }
         console.log("Something went wrong in the repository layer");
+            console.log("REPOSITORY ERROR:", error);
+    console.log("ERROR NAME:", error.name);
+    console.log("ERROR ERRORS:", error.errors);
         throw error;
+    
+
+    throw new ValidationError(error);
+
     }
 }
 

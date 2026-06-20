@@ -14,12 +14,12 @@ class UserService {
             const user = await this.UserRepository.create(data);
             return user;
         } catch (error) {
-            if(error.name = 'SequelizeValidationError') {
-                throw error;
-            }
-            console.log("something went wrong in the service layer");
-            throw error;
-        }
+    console.log("SERVICE ERROR:", error);
+    console.log("ERROR NAME:", error.name);
+    console.log("ERROR MESSAGE:", error.message);
+
+    throw error;
+}
     }
 
     async signIn(email, plainPassword) {
