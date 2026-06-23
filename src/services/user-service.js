@@ -9,15 +9,15 @@ class UserService {
     constructor() {
         this.UserRepository = new UserRepository();
     }
+
     async create(data) {
         try {
             const user = await this.UserRepository.create(data);
             return user;
         } catch (error) {
-    console.log("SERVICE ERROR:", error);
-    console.log("ERROR NAME:", error.name);
-    console.log("ERROR MESSAGE:", error.message);
-
+          console.log("SERVICE ERROR:", error);
+          console.log("ERROR NAME:", error.name);
+          console.log("ERROR MESSAGE:", error.message);
     throw error;
 }
     }
